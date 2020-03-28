@@ -3,11 +3,13 @@ import cv2
 import numpy as np
 import random
 import math
+import noise
+import sys
 from copy import copy
 
 
 # Create a scaled-down version of the image to better show dithering effects
-def scale_down():
+def scale_down_img():
     sdsq = scale_down * scale_down
     for y in range(h - scale_down + 1):
         if y % scale_down != 0:
@@ -220,10 +222,21 @@ def bayer_patterns():
 # Used to create selfie 12 (an error made the darkest black appear white), 13 (an error prevented the whitest white from
 # showing), 14, and 15 (which included random variances).
 def dither_bayer(y, x):
-    if bayer_rand and 25 < img2[y, x][0] < 230:
-        img2[y, x][0] += random.randrange(-15, 15)
+    #if bayer_rand and 25 < img2[y, x][0] < 230:
+        #img2[y, x][0] += random.randrange(-15, 15)
     c = int(img2[y, x][0] * 16 / 255)
     img2[y, x] = bayer[c][y % 4][x % 4]
+
+
+# Perlin Noise algorithm.
+def dither_noise(y, x):
+    c = img2[y, x][0] / 255
+    n = noise.pnoise1(c * 100)
+    n = (n + 1) / 2
+    if n > c:
+        img2[y, x] = [0]
+    else:
+        img2[y, x] = [255]
 
 
 # Dither this pixel according to the indicated algorithm.
@@ -242,25 +255,39 @@ def dither(alg):
                 dither_floyd_steinberg(y, x)
             elif alg is 5:
                 dither_bayer(y, x)
+            elif alg is 6:
+                dither_noise(y, x)
             else:
                 print("Incorrect dither algorithm number input. Please choose a number between 1 and 5.")
 
+
+if len(sys.argv) < 4:
+    print("Must provide 3 arguments: image path, dither algorithm, scale_down")
+    sys.exit()
 
 # Define bayer patterns
 bayer_patterns()
 
 # Define which dither algorithm will be used
-dit_alg = 5
+dit_alg = 6
+if sys.argv[2] is not None:
+    dit_alg = int(sys.argv[2])
 bayer_rand = False
 
 # You can give path to the image as first argument
-img = cv2.imread('Facetune_09-10-2019-13-27-21.jpeg', 0)
+if sys.argv[1] is None:
+    print("Please provide an image path")
+    sys.exit()
+img = cv2.imread(sys.argv[1], 0)
 
 # retrieve dimensions of original img
 h, w = img.shape[:2]
 
 scale_down = 4
-scale_up = 4
+scale_up = scale_down
+if sys.argv[3] is not None:
+    scale_down = int(sys.argv[3])
+    scale_up = scale_down
 
 h2 = int(h / scale_down)
 w2 = int(w / scale_down)
@@ -269,7 +296,7 @@ print(h, w)
 
 # create new image as scaled-down reference
 img2 = np.zeros((int(h / scale_down), int(w / scale_down), 1), np.uint8)
-scale_down()
+scale_down_img()
 
 dither(dit_alg)
 
@@ -284,7 +311,6 @@ for y3 in range(h-scale_down):
 cv2.imshow('image', img)
 cv2.imshow('image2', img2)
 cv2.imshow('image3', img3)
-
 
 k = cv2.waitKey(0) & 0xFF
 

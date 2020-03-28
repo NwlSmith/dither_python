@@ -14,6 +14,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1Vj2pl8NWKru2lESBft4msBoAnW" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -22,6 +25,8 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -49,10 +54,18 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="656" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1577814133005">
+    <state x="791" y="188" key="#Notifications" timestamp="1577924477996">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="656" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1577814133005" />
+    <state x="791" y="188" key="#Notifications/0.0.1920.1040@0.0.1920.1040" timestamp="1577924477996" />
+    <state x="700" y="172" key="SettingsEditor" timestamp="1577924471743">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="700" y="172" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1577924471743" />
+    <state x="656" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1585414495912">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="656" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585414495912" />
     <state x="623" y="239" width="672" height="678" key="search.everywhere.popup" timestamp="1577918013996">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
