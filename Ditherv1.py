@@ -68,6 +68,8 @@ def dither_mod(y, x):
         dither_mod_lower(y, x, 6)
     elif img2[y, x] >= 25:
         dither_mod_lower(y, x, 7)
+    else:
+        img2[y, x] = 0
 
 
 # Random Dither algorithm.
